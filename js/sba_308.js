@@ -4,6 +4,9 @@ const CourseInfo = {
 	name: 'Introduction to JavaScript',
 };
 
+console.log(CourseInfo.id);
+
+
 // The provided assignment group.
 const AssignmentGroup = {
 	id: 12345,
@@ -76,6 +79,17 @@ const LearnerSubmissions = [
 	},
 ];
 
+console.log(LearnerSubmissions[0].submission.score);
+console.log(LearnerSubmissions[0].learner_id);
+
+function getLearnerData(CourseInfo, AssignmentGroup, [LearnerSubmissions]) {
+    if (CourseInfo.id !== AssignmentGroup.course_id) {
+        throw new Error("Invalid input: AssignmentGroup does not belong to the specified course.");
+    }
+
+    const studentsData = {};
+}
+
 function getLearnerData(
 	course,
 	ag,
@@ -96,7 +110,7 @@ function getLearnerData(
 			2: 0.833, // late: (140 - 15) / 150
 		},
 	];
-
+    
 	return result;
 }
 
@@ -107,3 +121,68 @@ const result = getLearnerData(
 );
 
 console.log(result);
+
+/** 
+Your goal is to analyze and transform this data such that the output of your program is an array of objects, each containing the following information in the following format:
+*/
+
+
+// {
+    // the ID of the learner for which this data has been collected
+   // "id": number,
+   
+    // the learner’s total, weighted average, in which assignments
+    // with more points_possible should be counted for more
+    // e.g. a learner with 50/100 on one assignment and 190/200 on another
+    // would have a weighted average score of 240/300 = 80%.
+   // "avg": number,
+    // each assignment should have a key with its ID,
+    // and the value associated with it should be the percentage that
+    // the learner scored on the assignment (submission.score / points_possible)
+   // <assignment_id>: number,
+    // if an assignment is not yet due, it should not be included in either
+    // the average or the keyed dictionary of scores
+// }
+
+let studentsData = result
+
+for (let i = 0; i < studentsData.length; i++) {
+    let studentId = studentsData[i].id
+    console.log(studentId);
+    let studentAvg = studentsData[i].avg
+    console.log(studentAvg);
+
+}
+
+console.log(studentsData);
+console.log(studentsData[1][2]);
+console.log(studentsData[1].avg);
+
+/** If an AssignmentGroup does not belong to its course (mismatching course_id), your program should throw an error, letting the user know that the input was invalid. Similar data validation should occur elsewhere within the program. */
+
+/** You should also account for potential errors in the data that your program receives. What if points_possible is 0? You cannot divide by zero. What if a value that you are expecting to be a number is instead a string? */
+
+/**
+Use try/catch and other logic to handle these types of errors gracefully. */
+
+/**
+If an assignment is not yet due, do not include it in the results or the average. Additionally, if the learner’s submission is late (submitted_at is past due_at), deduct 10 percent of the total points possible from their score for that assignment. */
+
+
+
+// for (let i = 0; i < LearnerSubmissions.length; i++) {
+//     let learner = LearnerSubmissions[i].learner_id
+//     let assignment = LearnerSubmissions[i].assignment_id
+//     let score = LearnerSubmissions[i].submission.score
+//     let pointsPossible = AssignmentGroup.assignments.find((assignment) => assignment.id === LearnerSubmissions[i].assignment_id).points_possible
+
+//     if (!studentsData[learner]) {
+//         studentsData[learner] = {}
+//     }
+
+//     if (!studentsData[learner][assignment]) {
+//         studentsData[learner][assignment] = {}
+//     }
+
+//     studentsData[learner][assignment] = score / pointsPossible
+// }
