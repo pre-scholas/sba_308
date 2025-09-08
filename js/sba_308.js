@@ -255,23 +255,6 @@ if (LearnerSubmissions.submitted_at > LearnerSubmissions.due_at) {
 }
 
 
-// for (let i = 0; i < LearnerSubmissions.length; i++) {
-//     let learner = LearnerSubmissions[i].learner_id
-//     let assignment = LearnerSubmissions[i].assignment_id
-//     let score = LearnerSubmissions[i].submission.score
-//     let pointsPossible = AssignmentGroup.assignments.find((assignment) => assignment.id === LearnerSubmissions[i].assignment_id).points_possible
-
-//     if (!studentsData[learner]) {
-//         studentsData[learner] = {}
-//     }
-
-//     if (!studentsData[learner][assignment]) {
-//         studentsData[learner][assignment] = {}
-//     }
-
-//     studentsData[learner][assignment] = score / pointsPossible
-// }
-
 // set up variables for the weighted average calculation
 let totalPointsPossible = 0
 let totalScore = 0;
